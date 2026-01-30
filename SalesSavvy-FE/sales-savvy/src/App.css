@@ -1,0 +1,46 @@
+/* ======================
+   THEME VARIABLES
+====================== */
+:root {
+  --bg: #7fffd4;          /* aqua background */
+  --surface: #ffffff;
+  --primary: #4f46e5;
+  --secondary: #10b981;
+  --danger: #ef4444;
+  --text-primary: #111827;
+  --text-secondary: #6b7280;
+  --border: #e5e7eb;
+}
+
+/* Dark mode variables ONLY */
+.dark {
+  --bg: #0f172a;
+  --surface: #1e293b;
+  --primary: #6366f1;
+  --secondary: #22c55e;
+  --danger: #ef4444;
+  --text-primary: #e5e7eb;
+  --text-secondary: #9ca3af;
+  --border: #334155;
+}
+
+/* ======================
+   GLOBAL RESET
+====================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  min-height: 100vh;
+}
+
+/* ======================
+   GLOBAL BACKGROUND
+====================== */
+body {
+  background-color: var(--bg);
+  font-family: Arial, sans-serif;
+}

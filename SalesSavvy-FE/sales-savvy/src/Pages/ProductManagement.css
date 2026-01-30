@@ -1,0 +1,83 @@
+/* =====================
+   BUTTONS
+===================== */
+.add-product-btn {
+    width: 100%;
+    padding: 12px 0;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: 0.3s;
+}
+
+.add-product-btn:hover {
+    opacity: 0.8;
+}
+
+.primary-btn {
+    background-color: var(--primary);
+    color: white;
+}
+.primary-btn:hover {
+    cursor: pointer;
+}
+
+.update-btn {
+    background-color: var(--secondary);
+    color: white;
+}
+.update-btn:hover {
+    cursor: pointer;
+}
+
+.delete-btn {
+    background-color: var(--danger);
+    color: white;
+}
+.delete-btn:hover {
+    cursor: pointer;
+}
+
+/* =====================
+   CARD & TABLE
+===================== */
+.card {
+    background-color: var(--surface);
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--surface);
+}
+
+th {
+    background-color: var(--primary);
+    color: white;
+}
+
+td {
+    border-bottom: 1px solid var(--border);
+    color: var(--text-primary);
+}
+
+/* =====================
+   PAGE-SPECIFIC (OPTIONAL)
+===================== */
+.welcome-page {
+    background-color: aquamarine;
+    text-align: center;
+    size: 100px;
+}
+
+.welcome-text {
+    font-size:30px ;
+    padding: 50px;
+}
