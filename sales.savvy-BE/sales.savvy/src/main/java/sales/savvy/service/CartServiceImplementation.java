@@ -1,6 +1,7 @@
 package sales.savvy.service;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import sales.savvy.dto.CartData;
 import sales.savvy.dto.CartItemDTO;
-import sales.savvy.dto.RemoveCartItem;
 import sales.savvy.entity.Cart;
 import sales.savvy.entity.CartItems;
 import sales.savvy.entity.Product;
@@ -114,13 +114,49 @@ public class CartServiceImplementation implements CartService {
 
 
 	@Override
-	public void removeCartItem(RemoveCartItem data) {
+	@Transactional
+	public void removeCartItem(String username, int productId) {
 		// TODO Auto-generated method stub
-		User user = userRepo.findByUsername(data.getUsername());
+		User user = userRepo.findByUsername(username);
 		Cart cart = cartRepo.findByUser(user);
 		
-		CartItems item = cartItemRepo.findByCart_IdAndProduct_Id(cart.getId(), data.getProductId());
-		cartItemRepo.delete(item);
+		if(user == null) {
+			throw new RuntimeException("User not found.");
+		}
+		
+		if(cart == null) {
+			throw new RuntimeException("Cart not found.");
+		}
+		Long productIdLong = Long.valueOf(productId);
+		
+		CartItems item = cartItemRepo.findByCart_IdAndProduct_Id(cart.getId(), productIdLong);
+		
+		if(item == null) {
+			throw new RuntimeException("Cart item not found.");
+		} else {
+			cartItemRepo.delete(item);
+		}
+	}
+
+
+
+	@Override
+	@Transactional
+	public void clearCart(String username) {
+		// TODO Auto-generated method stub
+		User user = userRepo.findByUsername(username);
+		if(user == null) {
+			throw new RuntimeException("User not found");
+		}
+		
+		
+		Cart cart = cartRepo.findByUser(user);
+		if(cart == null) {
+			return;
+		}
+		
+		cartItemRepo.deleteByCart(cart);
+		cart.getItemList().clear();
 	}
 }
 
