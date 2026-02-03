@@ -143,6 +143,7 @@ export default function ViewCart() {
                 <td className="cart-price">₹{it.price}</td>
 
                 <td>
+                  <span>
                   <button
                     className="qty-btn"
                     onClick={() => updateQuantity(it, it.quantity - 1)}
@@ -158,6 +159,7 @@ export default function ViewCart() {
                   >
                     +
                   </button>
+                  </span>
                 </td>
 
                 <td className="cart-subtotal">
@@ -171,7 +173,7 @@ export default function ViewCart() {
                   >
                     Reset
                   </button>
-
+                  <br></br>
                   <button
                     className="btn btn-primary"
                     onClick={() => removeFromCart(it.productId)}
