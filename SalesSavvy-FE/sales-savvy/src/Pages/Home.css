@@ -1,0 +1,118 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Page background */
+.home {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #fde2e4, #f8edeb);
+}
+
+/* Main card */
+.hero-card {
+  background: #ffffff;
+  padding: 60px;
+  border-radius: 20px;
+  max-width: 750px;
+  text-align: center;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.12);
+  animation: fadeIn 0.8s ease;
+}
+
+/* Heading */
+.hero-card h1 {
+  font-size: 44px;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 20px;
+}
+
+.hero-card h1 span {
+  color: #ff5f7e;
+}
+
+/* Description */
+.hero-card p {
+  font-size: 18px;
+  color: #555;
+  line-height: 1.7;
+  margin-bottom: 45px;
+}
+
+/* Button group */
+.btn-group {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+/* Buttons */
+.btn {
+  padding: 14px 40px;
+  font-size: 16px;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Primary button */
+.btn.primary {
+  background: #ff5f7e;
+  color: white;
+}
+
+.btn.primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 25px rgba(255, 95, 126, 0.4);
+}
+
+/* Secondary button */
+.btn.secondary {
+  background: transparent;
+  color: #ff5f7e;
+  border: 2px solid #ff5f7e;
+}
+
+.btn.secondary:hover {
+  background: #ff5f7e;
+  color: white;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-card {
+    padding: 40px 25px;
+  }
+
+  .hero-card h1 {
+    font-size: 34px;
+  }
+
+  .hero-card p {
+    font-size: 16px;
+  }
+
+  .btn-group {
+    flex-direction: column;
+  }
+}

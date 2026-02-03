@@ -1,12 +1,13 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import './ViewCart.css';
+import { useNavigate } from 'react-router-dom';
 
 export default function ViewCart() {
 
   const [username] = useState(localStorage.getItem('username'));
   const [items, setItems] = useState([]);
-
+  const navigate = useNavigate();
   useEffect(() => {
     fetchCart();
   }, [username]);
@@ -33,9 +34,8 @@ export default function ViewCart() {
 
   if (!window.confirm("Remove item from cart?")) return;
 
-  axios.delete('http://localhost:8080/removeCartItem', {
-    data: { username, productId }
-  })
+  axios.delete(`http://localhost:8080/removeCartItem?username=${username}&productId=${productId}`
+  )
   .then(fetchCart)
   .catch(console.error);
   };
@@ -45,17 +45,53 @@ export default function ViewCart() {
   );
 
   const handlePayment = () => {
+    if(!username) {
+      alert("Please login again");
+      navigate('/');
+      return
+    }
+    if(totalAmount === 0) {
+    alert("Cart is empty");
+    navigate('/customerPage');
+    return;
+  }
 
   const options = {
     key: "rzp_test_S9mLIVtgioWnXQ",
-    amount: 500, // amount in paise (500 = ₹5)
+    amount: totalAmount*100, // amount in paise (500 = ₹5)
     currency: "INR",
     name: "Sales Savvy",
     description: "Order Payment",
-
+    
     handler: function (response) {
-      alert("Payment Successful");
-      console.log(response);
+      try {
+          axios.delete(`http://localhost:8080/clearCart`, {params: { username}}
+        );
+        setItems([]);
+        fetchCart();
+
+        navigate('/paymentSuccess', {
+          state: {
+            paymentId: response.razorpay_payment_id
+          }
+        });
+      } catch (err) {
+        console.error("Failed to clear cart", err);
+        alert("Payment done, but cart is not cleared. Contact support.");
+      }
+      // alert("Payment Successful");
+      // axios.delete(`http://localhost:8080/clearCart?username=${username}`)
+      // .then(() => {
+      //   setItems([]);
+      //   navigate('/paymentSuccess', {
+      //   state: {
+      //     paymentId: response.razorpay_payment_id,
+      //     orderId: response.razorpay_order_id
+      //   }
+      // });
+      // })
+      // .catch(err => console.log("Failed to clear cart", err));
+      // console.log(response);   
     },
 
     theme: {
@@ -64,6 +100,9 @@ export default function ViewCart() {
     };
 
     const rzp = new window.Razorpay(options);
+    rzp.on('payment failed', function() {
+      alert("Payment failed. Try again.");
+    });
     rzp.open();
   };
 

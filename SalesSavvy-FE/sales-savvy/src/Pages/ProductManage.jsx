@@ -13,7 +13,7 @@ export default function ProductManage() {
     .catch(err => console.log(err));
 
   const handleDelete = (id) => 
-    axios.get('http://localhost:8080/deleteProduct', { params: { id }})
+    axios.delete('http://localhost:8080/deleteProduct', { params: { id }})
     .then(fetchProducts)
     .catch(err => {
       alert("Failed to delete product");

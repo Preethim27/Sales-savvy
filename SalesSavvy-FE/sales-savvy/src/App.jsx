@@ -11,6 +11,7 @@ import UserManage from './Pages/UserManage';
 import AddProduct from './Pages/AddProduct';
 import UpdateProduct from './Pages/UpdateProduct';
 import ViewCart from './Pages/ViewCart';
+import PaymentSuccess from './Pages/PaymentSuccess';
 
 function App() {
   
@@ -30,6 +31,7 @@ function App() {
         <Route path='/UpdateProduct' element={<UpdateProduct/>}></Route>
 
         <Route path='/viewCart' element={<ViewCart/>}></Route>
+        <Route path='paymentSuccess' element={<PaymentSuccess/>}></Route>
 
       </Routes>
     </div>
